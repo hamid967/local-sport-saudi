@@ -6,7 +6,7 @@ import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/admin/")({
   head: () => ({ meta: [{ title: "الإدارة | الرياضة المحلية" }, { name: "description", content: "لوحة الإدارة." }, { property: "og:title", content: "الإدارة" }, { property: "og:description", content: "لوحة الإدارة." }, { name: "robots", content: "noindex" }] }),
   component: AdminPage,
 });
