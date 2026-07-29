@@ -1,8 +1,8 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { sportsProvider } from "@/lib/sports-provider";
+import { sportsProvider, type MatchRow } from "@/lib/sports-provider";
 import { MatchCard } from "@/components/site/match-card";
 import { EmptyState } from "@/components/site/empty-state";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -72,11 +72,11 @@ function MatchesPage() {
   });
 
   const grouped = useMemo(() => {
-    const map = new Map<string, typeof matches.data extends readonly (infer T)[] ? T[] : never>();
+    const map = new Map<string, MatchRow[]>();
     (matches.data ?? []).forEach((m) => {
       const key = new Date(m.kickoff_at).toISOString().slice(0, 10);
-      if (!map.has(key)) map.set(key, [] as never);
-      map.get(key)!.push(m as never);
+      if (!map.has(key)) map.set(key, []);
+      map.get(key)!.push(m);
     });
     return Array.from(map.entries());
   }, [matches.data]);
@@ -135,7 +135,7 @@ function MatchesPage() {
                 {new Date(date).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}
               </h2>
               <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-                {(list as never[]).map((m: never) => <MatchCard key={(m as { id: string }).id} match={m} />)}
+                {list.map((m) => <MatchCard key={m.id} match={m} />)}
               </div>
             </div>
           ))}

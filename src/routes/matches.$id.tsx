@@ -94,8 +94,8 @@ function MatchDetail() {
             <EmptyState message={t("empty")} />
           ) : (
             <ul className="space-y-2">
-              {events.data!.map((ev: never) => {
-                const e = ev as { id: string; event_type: string; minute: number | null; detail: string | null; team: { name_ar: string; name_en: string } | null; player: { full_name_ar: string; full_name_en: string } | null };
+              {(events.data ?? []).map((ev) => {
+                const e = ev as unknown as { id: string; event_type: string; minute: number | null; detail: string | null; team: { name_ar: string; name_en: string } | null; player: { full_name_ar: string; full_name_en: string } | null };
                 const teamName = e.team ? (lang === "ar" ? e.team.name_ar : e.team.name_en) : "";
                 const player = e.player ? (lang === "ar" ? e.player.full_name_ar : e.player.full_name_en) : "";
                 return (
