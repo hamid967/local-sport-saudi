@@ -62,7 +62,7 @@ function VenueDetail() {
     mutationFn: async () => {
       const start = new Date(`${date}T${startTime}:00`);
       const end = new Date(start.getTime() + duration * 60 * 60 * 1000);
-      const { data, error } = await supabase.rpc("create_booking", {
+      const { data, error } = await (supabase.rpc as unknown as (fn: string, args: Record<string, unknown>) => Promise<{ data: string | null; error: Error | null }>)("create_booking", {
         _venue_id: id,
         _start: start.toISOString(),
         _end: end.toISOString(),

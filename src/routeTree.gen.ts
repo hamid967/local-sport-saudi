@@ -9,12 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VenuesRouteImport } from './routes/venues'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as CompetitionsRouteImport } from './routes/competitions'
+import { Route as BookingsRouteImport } from './routes/bookings'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VenuesIdRouteImport } from './routes/venues.$id'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 import { Route as CompetitionsIdRouteImport } from './routes/competitions.$id'
 
+const VenuesRoute = VenuesRouteImport.update({
+  id: '/venues',
+  path: '/venues',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MatchesRoute = MatchesRouteImport.update({
   id: '/matches',
   path: '/matches',
@@ -25,10 +33,20 @@ const CompetitionsRoute = CompetitionsRouteImport.update({
   path: '/competitions',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookingsRoute = BookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const VenuesIdRoute = VenuesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => VenuesRoute,
 } as any)
 const MatchesIdRoute = MatchesIdRouteImport.update({
   id: '/$id',
@@ -43,53 +61,85 @@ const CompetitionsIdRoute = CompetitionsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
   '/matches': typeof MatchesRouteWithChildren
+  '/venues': typeof VenuesRouteWithChildren
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/venues/$id': typeof VenuesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
   '/matches': typeof MatchesRouteWithChildren
+  '/venues': typeof VenuesRouteWithChildren
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/venues/$id': typeof VenuesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
   '/matches': typeof MatchesRouteWithChildren
+  '/venues': typeof VenuesRouteWithChildren
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/venues/$id': typeof VenuesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/bookings'
     | '/competitions'
     | '/matches'
+    | '/venues'
     | '/competitions/$id'
     | '/matches/$id'
+    | '/venues/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/competitions' | '/matches' | '/competitions/$id' | '/matches/$id'
+  to:
+    | '/'
+    | '/bookings'
+    | '/competitions'
+    | '/matches'
+    | '/venues'
+    | '/competitions/$id'
+    | '/matches/$id'
+    | '/venues/$id'
   id:
     | '__root__'
     | '/'
+    | '/bookings'
     | '/competitions'
     | '/matches'
+    | '/venues'
     | '/competitions/$id'
     | '/matches/$id'
+    | '/venues/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookingsRoute: typeof BookingsRoute
   CompetitionsRoute: typeof CompetitionsRouteWithChildren
   MatchesRoute: typeof MatchesRouteWithChildren
+  VenuesRoute: typeof VenuesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/venues': {
+      id: '/venues'
+      path: '/venues'
+      fullPath: '/venues'
+      preLoaderRoute: typeof VenuesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/matches': {
       id: '/matches'
       path: '/matches'
@@ -104,12 +154,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompetitionsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bookings': {
+      id: '/bookings'
+      path: '/bookings'
+      fullPath: '/bookings'
+      preLoaderRoute: typeof BookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/venues/$id': {
+      id: '/venues/$id'
+      path: '/$id'
+      fullPath: '/venues/$id'
+      preLoaderRoute: typeof VenuesIdRouteImport
+      parentRoute: typeof VenuesRoute
     }
     '/matches/$id': {
       id: '/matches/$id'
@@ -151,10 +215,23 @@ const MatchesRouteChildren: MatchesRouteChildren = {
 const MatchesRouteWithChildren =
   MatchesRoute._addFileChildren(MatchesRouteChildren)
 
+interface VenuesRouteChildren {
+  VenuesIdRoute: typeof VenuesIdRoute
+}
+
+const VenuesRouteChildren: VenuesRouteChildren = {
+  VenuesIdRoute: VenuesIdRoute,
+}
+
+const VenuesRouteWithChildren =
+  VenuesRoute._addFileChildren(VenuesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookingsRoute: BookingsRoute,
   CompetitionsRoute: CompetitionsRouteWithChildren,
   MatchesRoute: MatchesRouteWithChildren,
+  VenuesRoute: VenuesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
