@@ -31,6 +31,11 @@ import { Route as PlayersIdRouteImport } from './routes/players.$id'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 import { Route as CompetitionsIdRouteImport } from './routes/competitions.$id'
 import { Route as AdminSportsRouteImport } from './routes/admin.sports'
+import { Route as AdminSeasonsRouteImport } from './routes/admin.seasons'
+import { Route as AdminRegionsRouteImport } from './routes/admin.regions'
+import { Route as AdminNeighborhoodsRouteImport } from './routes/admin.neighborhoods'
+import { Route as AdminCompetitionsRouteImport } from './routes/admin.competitions'
+import { Route as AdminCitiesRouteImport } from './routes/admin.cities'
 
 const VenuesRoute = VenuesRouteImport.update({
   id: '/venues',
@@ -142,6 +147,31 @@ const AdminSportsRoute = AdminSportsRouteImport.update({
   path: '/sports',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminSeasonsRoute = AdminSeasonsRouteImport.update({
+  id: '/seasons',
+  path: '/seasons',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRegionsRoute = AdminRegionsRouteImport.update({
+  id: '/regions',
+  path: '/regions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNeighborhoodsRoute = AdminNeighborhoodsRouteImport.update({
+  id: '/neighborhoods',
+  path: '/neighborhoods',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCompetitionsRoute = AdminCompetitionsRouteImport.update({
+  id: '/competitions',
+  path: '/competitions',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCitiesRoute = AdminCitiesRouteImport.update({
+  id: '/cities',
+  path: '/cities',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -159,6 +189,11 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/admin/cities': typeof AdminCitiesRoute
+  '/admin/competitions': typeof AdminCompetitionsRoute
+  '/admin/neighborhoods': typeof AdminNeighborhoodsRoute
+  '/admin/regions': typeof AdminRegionsRoute
+  '/admin/seasons': typeof AdminSeasonsRoute
   '/admin/sports': typeof AdminSportsRoute
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
@@ -182,6 +217,11 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/admin/cities': typeof AdminCitiesRoute
+  '/admin/competitions': typeof AdminCompetitionsRoute
+  '/admin/neighborhoods': typeof AdminNeighborhoodsRoute
+  '/admin/regions': typeof AdminRegionsRoute
+  '/admin/seasons': typeof AdminSeasonsRoute
   '/admin/sports': typeof AdminSportsRoute
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
@@ -207,6 +247,11 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/admin/cities': typeof AdminCitiesRoute
+  '/admin/competitions': typeof AdminCompetitionsRoute
+  '/admin/neighborhoods': typeof AdminNeighborhoodsRoute
+  '/admin/regions': typeof AdminRegionsRoute
+  '/admin/seasons': typeof AdminSeasonsRoute
   '/admin/sports': typeof AdminSportsRoute
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
@@ -233,6 +278,11 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/admin/cities'
+    | '/admin/competitions'
+    | '/admin/neighborhoods'
+    | '/admin/regions'
+    | '/admin/seasons'
     | '/admin/sports'
     | '/competitions/$id'
     | '/matches/$id'
@@ -256,6 +306,11 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/admin/cities'
+    | '/admin/competitions'
+    | '/admin/neighborhoods'
+    | '/admin/regions'
+    | '/admin/seasons'
     | '/admin/sports'
     | '/competitions/$id'
     | '/matches/$id'
@@ -280,6 +335,11 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/admin/cities'
+    | '/admin/competitions'
+    | '/admin/neighborhoods'
+    | '/admin/regions'
+    | '/admin/seasons'
     | '/admin/sports'
     | '/competitions/$id'
     | '/matches/$id'
@@ -465,15 +525,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSportsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/seasons': {
+      id: '/admin/seasons'
+      path: '/seasons'
+      fullPath: '/admin/seasons'
+      preLoaderRoute: typeof AdminSeasonsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/regions': {
+      id: '/admin/regions'
+      path: '/regions'
+      fullPath: '/admin/regions'
+      preLoaderRoute: typeof AdminRegionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/neighborhoods': {
+      id: '/admin/neighborhoods'
+      path: '/neighborhoods'
+      fullPath: '/admin/neighborhoods'
+      preLoaderRoute: typeof AdminNeighborhoodsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/competitions': {
+      id: '/admin/competitions'
+      path: '/competitions'
+      fullPath: '/admin/competitions'
+      preLoaderRoute: typeof AdminCompetitionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/cities': {
+      id: '/admin/cities'
+      path: '/cities'
+      fullPath: '/admin/cities'
+      preLoaderRoute: typeof AdminCitiesRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminCitiesRoute: typeof AdminCitiesRoute
+  AdminCompetitionsRoute: typeof AdminCompetitionsRoute
+  AdminNeighborhoodsRoute: typeof AdminNeighborhoodsRoute
+  AdminRegionsRoute: typeof AdminRegionsRoute
+  AdminSeasonsRoute: typeof AdminSeasonsRoute
   AdminSportsRoute: typeof AdminSportsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminCitiesRoute: AdminCitiesRoute,
+  AdminCompetitionsRoute: AdminCompetitionsRoute,
+  AdminNeighborhoodsRoute: AdminNeighborhoodsRoute,
+  AdminRegionsRoute: AdminRegionsRoute,
+  AdminSeasonsRoute: AdminSeasonsRoute,
   AdminSportsRoute: AdminSportsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
