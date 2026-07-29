@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VenuesRouteImport } from './routes/venues'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as OwnerRouteImport } from './routes/owner'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as MatchesRouteImport } from './routes/matches'
+import { Route as FavoritesRouteImport } from './routes/favorites'
+import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as CompetitionsRouteImport } from './routes/competitions'
 import { Route as BookingsRouteImport } from './routes/bookings'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VenuesIdRouteImport } from './routes/venues.$id'
+import { Route as TeamsIdRouteImport } from './routes/teams.$id'
+import { Route as PlayersIdRouteImport } from './routes/players.$id'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 import { Route as CompetitionsIdRouteImport } from './routes/competitions.$id'
 
@@ -23,9 +35,44 @@ const VenuesRoute = VenuesRouteImport.update({
   path: '/venues',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerRoute = OwnerRouteImport.update({
+  id: '/owner',
+  path: '/owner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MatchesRoute = MatchesRouteImport.update({
   id: '/matches',
   path: '/matches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompetitionsRoute = CompetitionsRouteImport.update({
@@ -38,6 +85,21 @@ const BookingsRoute = BookingsRouteImport.update({
   path: '/bookings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -47,6 +109,16 @@ const VenuesIdRoute = VenuesIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => VenuesRoute,
+} as any)
+const TeamsIdRoute = TeamsIdRouteImport.update({
+  id: '/teams/$id',
+  path: '/teams/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlayersIdRoute = PlayersIdRouteImport.update({
+  id: '/players/$id',
+  path: '/players/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const MatchesIdRoute = MatchesIdRouteImport.update({
   id: '/$id',
@@ -61,74 +133,158 @@ const CompetitionsIdRoute = CompetitionsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
+  '/explore': typeof ExploreRoute
+  '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
+  '/news': typeof NewsRoute
+  '/notifications': typeof NotificationsRoute
+  '/owner': typeof OwnerRoute
+  '/privacy': typeof PrivacyRoute
+  '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/players/$id': typeof PlayersIdRoute
+  '/teams/$id': typeof TeamsIdRoute
   '/venues/$id': typeof VenuesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
+  '/explore': typeof ExploreRoute
+  '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
+  '/news': typeof NewsRoute
+  '/notifications': typeof NotificationsRoute
+  '/owner': typeof OwnerRoute
+  '/privacy': typeof PrivacyRoute
+  '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/players/$id': typeof PlayersIdRoute
+  '/teams/$id': typeof TeamsIdRoute
   '/venues/$id': typeof VenuesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
+  '/explore': typeof ExploreRoute
+  '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
+  '/news': typeof NewsRoute
+  '/notifications': typeof NotificationsRoute
+  '/owner': typeof OwnerRoute
+  '/privacy': typeof PrivacyRoute
+  '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
+  '/players/$id': typeof PlayersIdRoute
+  '/teams/$id': typeof TeamsIdRoute
   '/venues/$id': typeof VenuesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/admin'
+    | '/auth'
     | '/bookings'
     | '/competitions'
+    | '/explore'
+    | '/favorites'
     | '/matches'
+    | '/news'
+    | '/notifications'
+    | '/owner'
+    | '/privacy'
+    | '/search'
     | '/venues'
     | '/competitions/$id'
     | '/matches/$id'
+    | '/players/$id'
+    | '/teams/$id'
     | '/venues/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/admin'
+    | '/auth'
     | '/bookings'
     | '/competitions'
+    | '/explore'
+    | '/favorites'
     | '/matches'
+    | '/news'
+    | '/notifications'
+    | '/owner'
+    | '/privacy'
+    | '/search'
     | '/venues'
     | '/competitions/$id'
     | '/matches/$id'
+    | '/players/$id'
+    | '/teams/$id'
     | '/venues/$id'
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/admin'
+    | '/auth'
     | '/bookings'
     | '/competitions'
+    | '/explore'
+    | '/favorites'
     | '/matches'
+    | '/news'
+    | '/notifications'
+    | '/owner'
+    | '/privacy'
+    | '/search'
     | '/venues'
     | '/competitions/$id'
     | '/matches/$id'
+    | '/players/$id'
+    | '/teams/$id'
     | '/venues/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
   BookingsRoute: typeof BookingsRoute
   CompetitionsRoute: typeof CompetitionsRouteWithChildren
+  ExploreRoute: typeof ExploreRoute
+  FavoritesRoute: typeof FavoritesRoute
   MatchesRoute: typeof MatchesRouteWithChildren
+  NewsRoute: typeof NewsRoute
+  NotificationsRoute: typeof NotificationsRoute
+  OwnerRoute: typeof OwnerRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SearchRoute: typeof SearchRoute
   VenuesRoute: typeof VenuesRouteWithChildren
+  PlayersIdRoute: typeof PlayersIdRoute
+  TeamsIdRoute: typeof TeamsIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -140,11 +296,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VenuesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner': {
+      id: '/owner'
+      path: '/owner'
+      fullPath: '/owner'
+      preLoaderRoute: typeof OwnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/matches': {
       id: '/matches'
       path: '/matches'
       fullPath: '/matches'
       preLoaderRoute: typeof MatchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/competitions': {
@@ -161,6 +366,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -174,6 +400,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/venues/$id'
       preLoaderRoute: typeof VenuesIdRouteImport
       parentRoute: typeof VenuesRoute
+    }
+    '/teams/$id': {
+      id: '/teams/$id'
+      path: '/teams/$id'
+      fullPath: '/teams/$id'
+      preLoaderRoute: typeof TeamsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/players/$id': {
+      id: '/players/$id'
+      path: '/players/$id'
+      fullPath: '/players/$id'
+      preLoaderRoute: typeof PlayersIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/matches/$id': {
       id: '/matches/$id'
@@ -228,10 +468,22 @@ const VenuesRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
   BookingsRoute: BookingsRoute,
   CompetitionsRoute: CompetitionsRouteWithChildren,
+  ExploreRoute: ExploreRoute,
+  FavoritesRoute: FavoritesRoute,
   MatchesRoute: MatchesRouteWithChildren,
+  NewsRoute: NewsRoute,
+  NotificationsRoute: NotificationsRoute,
+  OwnerRoute: OwnerRoute,
+  PrivacyRoute: PrivacyRoute,
+  SearchRoute: SearchRoute,
   VenuesRoute: VenuesRouteWithChildren,
+  PlayersIdRoute: PlayersIdRoute,
+  TeamsIdRoute: TeamsIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
