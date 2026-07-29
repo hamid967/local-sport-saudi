@@ -30,6 +30,7 @@ import { Route as TeamsIdRouteImport } from './routes/teams.$id'
 import { Route as PlayersIdRouteImport } from './routes/players.$id'
 import { Route as MatchesIdRouteImport } from './routes/matches.$id'
 import { Route as CompetitionsIdRouteImport } from './routes/competitions.$id'
+import { Route as AdminSportsRouteImport } from './routes/admin.sports'
 
 const VenuesRoute = VenuesRouteImport.update({
   id: '/venues',
@@ -136,6 +137,11 @@ const CompetitionsIdRoute = CompetitionsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => CompetitionsRoute,
 } as any)
+const AdminSportsRoute = AdminSportsRouteImport.update({
+  id: '/sports',
+  path: '/sports',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -153,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/admin/sports': typeof AdminSportsRoute
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
   '/players/$id': typeof PlayersIdRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/admin/sports': typeof AdminSportsRoute
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
   '/players/$id': typeof PlayersIdRoute
@@ -199,6 +207,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/admin/sports': typeof AdminSportsRoute
   '/competitions/$id': typeof CompetitionsIdRoute
   '/matches/$id': typeof MatchesIdRoute
   '/players/$id': typeof PlayersIdRoute
@@ -224,6 +233,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/admin/sports'
     | '/competitions/$id'
     | '/matches/$id'
     | '/players/$id'
@@ -246,6 +256,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/admin/sports'
     | '/competitions/$id'
     | '/matches/$id'
     | '/players/$id'
@@ -269,6 +280,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/admin/sports'
     | '/competitions/$id'
     | '/matches/$id'
     | '/players/$id'
@@ -446,14 +458,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompetitionsIdRouteImport
       parentRoute: typeof CompetitionsRoute
     }
+    '/admin/sports': {
+      id: '/admin/sports'
+      path: '/sports'
+      fullPath: '/admin/sports'
+      preLoaderRoute: typeof AdminSportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminSportsRoute: typeof AdminSportsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminSportsRoute: AdminSportsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
