@@ -84,11 +84,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "الرياضة المحلية | Local Sport" },
-      { name: "description", content: "منصة سعودية للنتائج والمباريات وحجز الملاعب المحلية." },
+      { name: "description", content: "نتائج مباشرة، جداول ومسابقات، وحجز ملاعب داخل المملكة." },
       { property: "og:title", content: "الرياضة المحلية | Local Sport" },
-      { property: "og:description", content: "منصة سعودية للنتائج والمباريات وحجز الملاعب المحلية." },
+      { property: "og:description", content: "نتائج مباشرة، جداول ومسابقات، وحجز ملاعب داخل المملكة." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "الرياضة المحلية | Local Sport" },
+      { name: "twitter:description", content: "نتائج مباشرة، جداول ومسابقات، وحجز ملاعب داخل المملكة." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e9230fd8-895a-4fed-83d6-ef4d444dc97b/id-preview-22ba752a--f4f768b4-eba7-4194-b216-157ab995e468.lovable.app-1785393580997.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e9230fd8-895a-4fed-83d6-ef4d444dc97b/id-preview-22ba752a--f4f768b4-eba7-4194-b216-157ab995e468.lovable.app-1785393580997.png" },
     ],
     links: [
       {
