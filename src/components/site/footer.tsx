@@ -30,6 +30,7 @@ export function SiteFooter() {
             <ul className="space-y-1 text-xs">
               <li><Link to="/about" className="hover:text-primary">{t("about")}</Link></li>
               <li><Link to="/privacy" className="hover:text-primary">{t("privacy")}</Link></li>
+              <li><Link to="/connect" className="hover:text-primary">ربط مساعد ذكي</Link></li>
             </ul>
           </div>
         </div>
