@@ -7,14 +7,33 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies and builds
 node_modules
 dist
 dist-ssr
+build
+coverage
 .output
 .vinxi
 .tanstack/**
 .nitro
+.cache
+.vite
+
+# Environment
+.env
+.env.*
+!.env.example
 *.local
+
+# Supabase local state
+supabase/.branches
+supabase/.temp
+supabase/.env
+
+# Hosting
+.vercel
+.netlify
 
 # Wrangler / Cloudflare
 .wrangler/
