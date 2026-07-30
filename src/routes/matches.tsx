@@ -63,7 +63,7 @@ function MatchesPage() {
     queryKey: ["matches", search.range, comp, team],
     queryFn: () => {
       if (search.range === "live") return sportsProvider.getLiveMatches();
-      const [from, to] = getRange(search.range);
+      const [from, to] = getRange(search.range ?? "today");
       return sportsProvider.getMatchesInRange(from, to, {
         competition: comp === "all" ? undefined : comp,
         team: team === "all" ? undefined : team,
