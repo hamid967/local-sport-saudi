@@ -1,4 +1,5 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,6 +18,7 @@ function BookingsPage() {
   const { t, lang } = useI18n();
   const { user, loading } = useAuth();
   const qc = useQueryClient();
+  const [tab, setTab] = useState<"upcoming" | "past">("upcoming");
   const bookings = useQuery({
     queryKey: ["my-bookings", user?.id],
     enabled: !!user,
@@ -44,15 +46,33 @@ function BookingsPage() {
     );
   }
 
+  const now = Date.now();
+  const all = bookings.data ?? [];
+  const list = all.filter((b) =>
+    tab === "upcoming"
+      ? new Date(b.start_at).getTime() >= now && b.status !== "cancelled"
+      : new Date(b.start_at).getTime() < now || b.status === "cancelled",
+  );
+
   return (
     <div className="container mx-auto max-w-5xl px-4 py-6">
       <h1 className="text-2xl font-bold mb-4">{t("myBookings")}</h1>
-      {bookings.isLoading ? <Skeleton className="h-40" /> : (bookings.data ?? []).length === 0 ? (
+      <div className="flex gap-2 mb-4">
+        <Button variant={tab === "upcoming" ? "default" : "outline"} size="sm" onClick={() => setTab("upcoming")}>
+          القادمة ({all.filter((b) => new Date(b.start_at).getTime() >= now && b.status !== "cancelled").length})
+        </Button>
+        <Button variant={tab === "past" ? "default" : "outline"} size="sm" onClick={() => setTab("past")}>
+          السابقة والملغاة
+        </Button>
+      </div>
+      {bookings.isLoading ? <Skeleton className="h-40" /> : list.length === 0 ? (
         <EmptyState message={t("empty")} />
       ) : (
         <ul className="space-y-3">
-          {bookings.data!.map((b) => {
+          {list.map((b) => {
             const v = b.venue as { id: string; name_ar: string; name_en: string; address: string | null } | null;
+            const startsIn = new Date(b.start_at).getTime() - now;
+            const hoursLeft = startsIn / 3600000;
             return (
               <li key={b.id} className="rounded-lg border border-border bg-card p-4 flex flex-col md:flex-row md:items-center gap-3">
                 <div className="flex-1">
@@ -63,6 +83,13 @@ function BookingsPage() {
                   <div className="text-sm mt-1 tabular-nums">
                     {new Date(b.start_at).toLocaleString()} — {new Date(b.end_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                   </div>
+                  {startsIn > 0 && hoursLeft <= 48 && (
+                    <div className="text-xs mt-1 text-primary font-medium">
+                      {hoursLeft < 1
+                        ? `يبدأ خلال ${Math.max(1, Math.round(startsIn / 60000))} دقيقة`
+                        : `يبدأ خلال ${Math.round(hoursLeft)} ساعة`}
+                    </div>
+                  )}
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-sm font-bold text-primary">{b.total_price} ريال</span>
