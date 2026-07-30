@@ -31,6 +31,7 @@ const NAV: { to: string; label: string }[] = [
   { to: "/admin/venues", label: "الملاعب" },
   { to: "/admin/articles", label: "الأخبار" },
   { to: "/admin/roles", label: "الأدوار" },
+  { to: "/admin/reports", label: "التقارير" },
 ];
 
 function AdminLayout() {

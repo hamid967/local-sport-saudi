@@ -35,6 +35,7 @@ import { Route as AdminTeamsRouteImport } from './routes/admin.teams'
 import { Route as AdminSportsRouteImport } from './routes/admin.sports'
 import { Route as AdminSeasonsRouteImport } from './routes/admin.seasons'
 import { Route as AdminRolesRouteImport } from './routes/admin.roles'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
 import { Route as AdminRegionsRouteImport } from './routes/admin.regions'
 import { Route as AdminPlayersRouteImport } from './routes/admin.players'
 import { Route as AdminNeighborhoodsRouteImport } from './routes/admin.neighborhoods'
@@ -173,6 +174,11 @@ const AdminRolesRoute = AdminRolesRouteImport.update({
   path: '/roles',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminRegionsRoute = AdminRegionsRouteImport.update({
   id: '/regions',
   path: '/regions',
@@ -232,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/admin/neighborhoods': typeof AdminNeighborhoodsRoute
   '/admin/players': typeof AdminPlayersRoute
   '/admin/regions': typeof AdminRegionsRoute
+  '/admin/reports': typeof AdminReportsRoute
   '/admin/roles': typeof AdminRolesRoute
   '/admin/seasons': typeof AdminSeasonsRoute
   '/admin/sports': typeof AdminSportsRoute
@@ -266,6 +273,7 @@ export interface FileRoutesByTo {
   '/admin/neighborhoods': typeof AdminNeighborhoodsRoute
   '/admin/players': typeof AdminPlayersRoute
   '/admin/regions': typeof AdminRegionsRoute
+  '/admin/reports': typeof AdminReportsRoute
   '/admin/roles': typeof AdminRolesRoute
   '/admin/seasons': typeof AdminSeasonsRoute
   '/admin/sports': typeof AdminSportsRoute
@@ -302,6 +310,7 @@ export interface FileRoutesById {
   '/admin/neighborhoods': typeof AdminNeighborhoodsRoute
   '/admin/players': typeof AdminPlayersRoute
   '/admin/regions': typeof AdminRegionsRoute
+  '/admin/reports': typeof AdminReportsRoute
   '/admin/roles': typeof AdminRolesRoute
   '/admin/seasons': typeof AdminSeasonsRoute
   '/admin/sports': typeof AdminSportsRoute
@@ -339,6 +348,7 @@ export interface FileRouteTypes {
     | '/admin/neighborhoods'
     | '/admin/players'
     | '/admin/regions'
+    | '/admin/reports'
     | '/admin/roles'
     | '/admin/seasons'
     | '/admin/sports'
@@ -373,6 +383,7 @@ export interface FileRouteTypes {
     | '/admin/neighborhoods'
     | '/admin/players'
     | '/admin/regions'
+    | '/admin/reports'
     | '/admin/roles'
     | '/admin/seasons'
     | '/admin/sports'
@@ -408,6 +419,7 @@ export interface FileRouteTypes {
     | '/admin/neighborhoods'
     | '/admin/players'
     | '/admin/regions'
+    | '/admin/reports'
     | '/admin/roles'
     | '/admin/seasons'
     | '/admin/sports'
@@ -625,6 +637,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRolesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/regions': {
       id: '/admin/regions'
       path: '/regions'
@@ -685,6 +704,7 @@ interface AdminRouteChildren {
   AdminNeighborhoodsRoute: typeof AdminNeighborhoodsRoute
   AdminPlayersRoute: typeof AdminPlayersRoute
   AdminRegionsRoute: typeof AdminRegionsRoute
+  AdminReportsRoute: typeof AdminReportsRoute
   AdminRolesRoute: typeof AdminRolesRoute
   AdminSeasonsRoute: typeof AdminSeasonsRoute
   AdminSportsRoute: typeof AdminSportsRoute
@@ -701,6 +721,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminNeighborhoodsRoute: AdminNeighborhoodsRoute,
   AdminPlayersRoute: AdminPlayersRoute,
   AdminRegionsRoute: AdminRegionsRoute,
+  AdminReportsRoute: AdminReportsRoute,
   AdminRolesRoute: AdminRolesRoute,
   AdminSeasonsRoute: AdminSeasonsRoute,
   AdminSportsRoute: AdminSportsRoute,
