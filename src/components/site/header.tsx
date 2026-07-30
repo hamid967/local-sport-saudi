@@ -13,6 +13,7 @@ import {
 import { useI18n } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth-context";
 import { cn } from "@/lib/utils";
+import { NotificationBell } from "@/components/site/notification-bell";
 
 const NAV_KEYS = [
   ["home", "/"],
@@ -95,6 +96,8 @@ export function SiteHeader() {
             <SearchIcon className="size-5" />
           </Button>
         </Link>
+
+        {user && <NotificationBell />}
 
         <Button
           variant="ghost"
