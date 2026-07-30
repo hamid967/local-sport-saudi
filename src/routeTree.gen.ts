@@ -19,6 +19,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as CompetitionsRouteImport } from './routes/competitions'
 import { Route as BookingsRouteImport } from './routes/bookings'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -97,6 +98,11 @@ const FavoritesRoute = FavoritesRouteImport.update({
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectRoute = ConnectRouteImport.update({
+  id: '/connect',
+  path: '/connect',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompetitionsRoute = CompetitionsRouteImport.update({
@@ -255,6 +261,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
+  '/connect': typeof ConnectRoute
   '/explore': typeof ExploreRoute
   '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
@@ -295,6 +302,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
+  '/connect': typeof ConnectRoute
   '/explore': typeof ExploreRoute
   '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
@@ -337,6 +345,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
   '/competitions': typeof CompetitionsRouteWithChildren
+  '/connect': typeof ConnectRoute
   '/explore': typeof ExploreRoute
   '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
@@ -380,6 +389,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bookings'
     | '/competitions'
+    | '/connect'
     | '/explore'
     | '/favorites'
     | '/matches'
@@ -420,6 +430,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bookings'
     | '/competitions'
+    | '/connect'
     | '/explore'
     | '/favorites'
     | '/matches'
@@ -461,6 +472,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bookings'
     | '/competitions'
+    | '/connect'
     | '/explore'
     | '/favorites'
     | '/matches'
@@ -503,6 +515,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BookingsRoute: typeof BookingsRoute
   CompetitionsRoute: typeof CompetitionsRouteWithChildren
+  ConnectRoute: typeof ConnectRoute
   ExploreRoute: typeof ExploreRoute
   FavoritesRoute: typeof FavoritesRoute
   MatchesRoute: typeof MatchesRouteWithChildren
@@ -591,6 +604,13 @@ declare module '@tanstack/react-router' {
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connect': {
+      id: '/connect'
+      path: '/connect'
+      fullPath: '/connect'
+      preLoaderRoute: typeof ConnectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/competitions': {
@@ -876,6 +896,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BookingsRoute: BookingsRoute,
   CompetitionsRoute: CompetitionsRouteWithChildren,
+  ConnectRoute: ConnectRoute,
   ExploreRoute: ExploreRoute,
   FavoritesRoute: FavoritesRoute,
   MatchesRoute: MatchesRouteWithChildren,
