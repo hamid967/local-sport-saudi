@@ -11,7 +11,7 @@ import { useI18n } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (s: Record<string, unknown>) => ({
+  validateSearch: (s: Record<string, unknown>): { next?: string } => ({
     next: typeof s.next === "string" && s.next.startsWith("/") && !s.next.startsWith("//") ? s.next : undefined,
   }),
   head: () => ({ meta: [{ title: "تسجيل الدخول | الرياضة المحلية" }, { name: "description", content: "سجل دخولك أو أنشئ حسابًا." }, { property: "og:title", content: "تسجيل الدخول" }, { property: "og:description", content: "سجل دخولك أو أنشئ حسابًا." }] }),
