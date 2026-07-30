@@ -160,3 +160,11 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.55; }
 }
+
+/* Hide the Lovable "Made with" badge without affecting layout */
+[data-lovable-badge],
+.lovable-badge,
+a[href*="lovable.dev"],
+a[href*="lovable.app"] {
+  display: none !important;
+}
