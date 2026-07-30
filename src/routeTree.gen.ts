@@ -15,6 +15,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as OwnerRouteImport } from './routes/owner'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as ExploreRouteImport } from './routes/explore'
@@ -43,6 +44,10 @@ import { Route as AdminMatchesRouteImport } from './routes/admin.matches'
 import { Route as AdminCompetitionsRouteImport } from './routes/admin.competitions'
 import { Route as AdminCitiesRouteImport } from './routes/admin.cities'
 import { Route as AdminArticlesRouteImport } from './routes/admin.articles'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const VenuesRoute = VenuesRouteImport.update({
   id: '/venues',
@@ -72,6 +77,11 @@ const NotificationsRoute = NotificationsRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MatchesRoute = MatchesRouteImport.update({
@@ -214,6 +224,29 @@ const AdminArticlesRoute = AdminArticlesRouteImport.update({
   path: '/articles',
   getParentRoute: () => AdminRoute,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93ListToolsRoute =
+  Char91DotmcpChar93ListToolsRouteImport.update({
+    id: '/.mcp/list-tools',
+    path: '/.mcp/list-tools',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const Char91DotmcpChar93InvokeToolToolRoute =
+  Char91DotmcpChar93InvokeToolToolRouteImport.update({
+    id: '/.mcp/invoke-tool/$tool',
+    path: '/.mcp/invoke-tool/$tool',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -225,12 +258,15 @@ export interface FileRoutesByFullPath {
   '/explore': typeof ExploreRoute
   '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
+  '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/notifications': typeof NotificationsRoute
   '/owner': typeof OwnerRoute
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/cities': typeof AdminCitiesRoute
   '/admin/competitions': typeof AdminCompetitionsRoute
@@ -250,6 +286,8 @@ export interface FileRoutesByFullPath {
   '/teams/$id': typeof TeamsIdRoute
   '/venues/$id': typeof VenuesIdRoute
   '/admin/': typeof AdminIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -260,12 +298,15 @@ export interface FileRoutesByTo {
   '/explore': typeof ExploreRoute
   '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
+  '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/notifications': typeof NotificationsRoute
   '/owner': typeof OwnerRoute
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/cities': typeof AdminCitiesRoute
   '/admin/competitions': typeof AdminCompetitionsRoute
@@ -285,6 +326,8 @@ export interface FileRoutesByTo {
   '/teams/$id': typeof TeamsIdRoute
   '/venues/$id': typeof VenuesIdRoute
   '/admin': typeof AdminIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -297,12 +340,15 @@ export interface FileRoutesById {
   '/explore': typeof ExploreRoute
   '/favorites': typeof FavoritesRoute
   '/matches': typeof MatchesRouteWithChildren
+  '/mcp': typeof McpRoute
   '/news': typeof NewsRoute
   '/notifications': typeof NotificationsRoute
   '/owner': typeof OwnerRoute
   '/privacy': typeof PrivacyRoute
   '/search': typeof SearchRoute
   '/venues': typeof VenuesRouteWithChildren
+  '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/articles': typeof AdminArticlesRoute
   '/admin/cities': typeof AdminCitiesRoute
   '/admin/competitions': typeof AdminCompetitionsRoute
@@ -322,6 +368,8 @@ export interface FileRoutesById {
   '/teams/$id': typeof TeamsIdRoute
   '/venues/$id': typeof VenuesIdRoute
   '/admin/': typeof AdminIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -335,12 +383,15 @@ export interface FileRouteTypes {
     | '/explore'
     | '/favorites'
     | '/matches'
+    | '/mcp'
     | '/news'
     | '/notifications'
     | '/owner'
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/cities'
     | '/admin/competitions'
@@ -360,6 +411,8 @@ export interface FileRouteTypes {
     | '/teams/$id'
     | '/venues/$id'
     | '/admin/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -370,12 +423,15 @@ export interface FileRouteTypes {
     | '/explore'
     | '/favorites'
     | '/matches'
+    | '/mcp'
     | '/news'
     | '/notifications'
     | '/owner'
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/cities'
     | '/admin/competitions'
@@ -395,6 +451,8 @@ export interface FileRouteTypes {
     | '/teams/$id'
     | '/venues/$id'
     | '/admin'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
   id:
     | '__root__'
     | '/'
@@ -406,12 +464,15 @@ export interface FileRouteTypes {
     | '/explore'
     | '/favorites'
     | '/matches'
+    | '/mcp'
     | '/news'
     | '/notifications'
     | '/owner'
     | '/privacy'
     | '/search'
     | '/venues'
+    | '/.mcp/list-tools'
+    | '/.well-known/oauth-protected-resource'
     | '/admin/articles'
     | '/admin/cities'
     | '/admin/competitions'
@@ -431,6 +492,8 @@ export interface FileRouteTypes {
     | '/teams/$id'
     | '/venues/$id'
     | '/admin/'
+    | '/.lovable/oauth/consent'
+    | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -443,14 +506,19 @@ export interface RootRouteChildren {
   ExploreRoute: typeof ExploreRoute
   FavoritesRoute: typeof FavoritesRoute
   MatchesRoute: typeof MatchesRouteWithChildren
+  McpRoute: typeof McpRoute
   NewsRoute: typeof NewsRoute
   NotificationsRoute: typeof NotificationsRoute
   OwnerRoute: typeof OwnerRoute
   PrivacyRoute: typeof PrivacyRoute
   SearchRoute: typeof SearchRoute
   VenuesRoute: typeof VenuesRouteWithChildren
+  Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   PlayersIdRoute: typeof PlayersIdRoute
   TeamsIdRoute: typeof TeamsIdRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
+  Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -495,6 +563,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/matches': {
@@ -693,6 +768,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminArticlesRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/list-tools': {
+      id: '/.mcp/list-tools'
+      path: '/.mcp/list-tools'
+      fullPath: '/.mcp/list-tools'
+      preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.mcp/invoke-tool/$tool': {
+      id: '/.mcp/invoke-tool/$tool'
+      path: '/.mcp/invoke-tool/$tool'
+      fullPath: '/.mcp/invoke-tool/$tool'
+      preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -776,14 +879,20 @@ const rootRouteChildren: RootRouteChildren = {
   ExploreRoute: ExploreRoute,
   FavoritesRoute: FavoritesRoute,
   MatchesRoute: MatchesRouteWithChildren,
+  McpRoute: McpRoute,
   NewsRoute: NewsRoute,
   NotificationsRoute: NotificationsRoute,
   OwnerRoute: OwnerRoute,
   PrivacyRoute: PrivacyRoute,
   SearchRoute: SearchRoute,
   VenuesRoute: VenuesRouteWithChildren,
+  Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   PlayersIdRoute: PlayersIdRoute,
   TeamsIdRoute: TeamsIdRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
+  Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

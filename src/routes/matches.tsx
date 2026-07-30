@@ -21,7 +21,7 @@ export const Route = createFileRoute("/matches")({
       { property: "og:description", content: "المباريات المباشرة والقادمة والمنتهية." },
     ],
   }),
-  validateSearch: (s: Record<string, unknown>) => ({
+  validateSearch: (s: Record<string, unknown>): { range?: Range } => ({
     range: (s.range as Range) ?? "today",
   }),
   component: MatchesPage,

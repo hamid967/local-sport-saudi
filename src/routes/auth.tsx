@@ -11,6 +11,9 @@ import { useI18n } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/auth")({
+  validateSearch: (s: Record<string, unknown>): { next?: string } => ({
+    next: typeof s.next === "string" && s.next.startsWith("/") && !s.next.startsWith("//") ? s.next : undefined,
+  }),
   head: () => ({ meta: [{ title: "تسجيل الدخول | الرياضة المحلية" }, { name: "description", content: "سجل دخولك أو أنشئ حسابًا." }, { property: "og:title", content: "تسجيل الدخول" }, { property: "og:description", content: "سجل دخولك أو أنشئ حسابًا." }] }),
   component: AuthPage,
 });
@@ -19,21 +22,30 @@ function AuthPage() {
   const { t } = useI18n();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
 
+  const goNext = () => {
+    if (next) window.location.href = next;
+    else navigate({ to: "/" });
+  };
+
   useEffect(() => {
-    if (user) navigate({ to: "/" });
-  }, [user, navigate]);
+    if (user) {
+      if (next) window.location.href = next;
+      else navigate({ to: "/" });
+    }
+  }, [user, navigate, next]);
 
   const signIn = async () => {
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
     if (error) toast.error(error.message);
-    else navigate({ to: "/" });
+    else goNext();
   };
 
   const signUp = async () => {
@@ -41,7 +53,10 @@ function AuthPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: window.location.origin, data: { display_name: name } },
+      options: {
+        emailRedirectTo: next ? window.location.origin + next : window.location.origin,
+        data: { display_name: name },
+      },
     });
     setBusy(false);
     if (error) toast.error(error.message);
@@ -49,7 +64,9 @@ function AuthPage() {
   };
 
   const google = async () => {
-    const r = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
+    const r = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: next ? window.location.origin + next : window.location.origin,
+    });
     if (r.error) toast.error(String(r.error));
   };
 

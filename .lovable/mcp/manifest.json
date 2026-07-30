@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "sdk_version": "0.25.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://yymwossuspokwopifdvx.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "saudi-sport-hub",
+      "version": "0.1.0",
+      "title": "Saudi Sport Hub"
+    },
+    "tools": [
+      {
+        "name": "list_matches",
+        "title": "List matches",
+        "description": "List Saudi football matches with optional status filter (live, scheduled, finished) and date range.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "scheduled",
+                "live",
+                "finished",
+                "postponed",
+                "cancelled"
+              ]
+            },
+            "from": {
+              "description": "ISO date/time lower bound for kickoff.",
+              "type": "string"
+            },
+            "to": {
+              "description": "ISO date/time upper bound for kickoff.",
+              "type": "string"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_standings",
+        "title": "List standings",
+        "description": "Return the league table rows for a competition season.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "season_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_venues",
+        "title": "Search venues",
+        "description": "Search bookable Saudi sports venues by name, surface type, and maximum hourly price.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Text to match against the venue name.",
+              "type": "string"
+            },
+            "surface": {
+              "type": "string"
+            },
+            "max_price_per_hour": {
+              "type": "number"
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_my_bookings",
+        "title": "List my bookings",
+        "description": "List the signed-in user's venue bookings, newest first.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "create_booking",
+        "title": "Create venue booking",
+        "description": "Book a venue for the signed-in user for a given time range. Fails if the slot is already taken.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "venue_id": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$"
+            },
+            "start_at": {
+              "type": "string",
+              "description": "ISO start datetime."
+            },
+            "end_at": {
+              "type": "string",
+              "description": "ISO end datetime."
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "venue_id",
+            "start_at",
+            "end_at"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
